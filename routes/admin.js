@@ -13,15 +13,16 @@ const get_data = async url => {
         const response = await fetch(url);
         const json = await response.text();
         monitorArrayBeforeSlice = json;
-        console.log(typeof (monitorArrayBeforeSlice))
         monitorArray = monitorArrayBeforeSlice.split(',');
-        console.log(monitorArray)
+        console.log(monitorArray[0])
     } catch (error) {
         console.log(error);
     }
 };
 
-get_data(url);
+setInterval(function () {
+    get_data(url);
+}, 2000);
 
 
 
@@ -36,9 +37,9 @@ router.all('*', (req, res, next) => {
 /* GET home page. */
 router.get('/', (req, res) => {
 
-
-
     res.render('admin', { title: 'Panel Admina', content: monitorArray });
+
+
 });
 
 
